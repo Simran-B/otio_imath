@@ -5,8 +5,8 @@ set -ex
 git clone --depth 1 --branch "$OTIO_VERSION" https://github.com/PixarAnimationStudios/OpenTimelineIO.git
 cd OpenTimelineIO
 
-# (A): Comment out below line
-# (B), (C), (D): Uncomment below line
+# (A), (B), (C): Comment out below line
+# (D), (E): Uncomment below line
 #patch -u ./tests/CMakeLists.txt /tmp/FixTestsIncludeDir.patch
 
 mkdir build
@@ -27,7 +27,7 @@ cmake .. -G "Ninja" \
 #  -DOTIO_PYTHON_INSTALL=OFF \
 #  -DOTIO_IMATH_LIBS="${OLIVE_INSTALL_PREFIX}/lib64/libImath-3_1.so.29.4.0"
 
-# (C):
+# (C), (D):
 #cmake .. -G "Ninja" \
 #  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 #  -DCMAKE_CXX_STANDARD="17" \
@@ -36,7 +36,7 @@ cmake .. -G "Ninja" \
 #  -DOTIO_IMATH_LIBS="${OLIVE_INSTALL_PREFIX}/lib64/libImath-3_1.so.29.4.0" \
 #  -DIMATH_INCLUDES="${OLIVE_INSTALL_PREFIX}/include/Imath"
 
-# (D):
+# (E):
 #cmake .. -G "Ninja" \
 #  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 #  -DCMAKE_CXX_STANDARD="17" \

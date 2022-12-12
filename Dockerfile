@@ -3,7 +3,8 @@ ARG OTIO_VERSION=v0.15
 # (A): No system Imath, leading to a linker error - comment out below line
 # (B): Use system Imath with OTIO_IMATH_LIBS - uncomment below line
 # (C): Use system Imath with OTIO_IMATH_LIBS and IMATH_INCLUDES - uncomment below line
-# (D): Use system Imath with OTIO_FIND_IMATH=ON - uncomment below line
+# (D): Use system Imath with OTIO_IMATH_LIBS and IMATH_INCLUDES with test fix - uncomment below line
+# (E): Use system Imath with OTIO_FIND_IMATH=ON - uncomment below line
 #FROM aswf/ci-package-imath:2022 as ci-package-imath
 
 FROM olivevideoeditor/ci-common:2 as ci-otio
@@ -14,7 +15,7 @@ COPY build_otio.sh DisableImathPythonRelease.patch FixTestsIncludeDir.patch \
      /tmp/
 
 # (A): Comment out below 2 lines
-# (B), (C), (D): Uncomment below 2 lines
+# (B), (C), (D), (E): Uncomment below 2 lines
 #COPY --from=ci-package-imath /. /usr/local/
 #RUN patch -u /usr/local/lib64/cmake/Imath/ImathTargets-release.cmake /tmp/DisableImathPythonRelease.patch
 
@@ -36,6 +37,7 @@ COPY --from=ci-package-openexr /. /usr/local/
 COPY --from=ci-package-imath /. /usr/local/
 COPY --from=ci-package-otio /. /usr/local/
 
+COPY DisableImathPythonRelease.patch /tmp/
 RUN patch -u /usr/local/lib64/cmake/Imath/ImathTargets-release.cmake /tmp/DisableImathPythonRelease.patch
 
 # Use docker build ... --build-arg BUST_CACHE=<something-random> to force re-copying and rebuild
