@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.24)
+
+project(software VERSION 0.2.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
+find_package(OpenEXR REQUIRED)
+list(APPEND APP_LIBRARIES ${OPENEXR_LIBRARIES})
+list(APPEND APP_INCLUDE_DIRS ${OPENEXR_INCLUDES})
+
+add_executable(app main.cpp)
+target_link_libraries(app PRIVATE ${APP_LIBRARIES})
+target_include_directories(app PRIVATE ${APP_INCLUDE_DIRS})

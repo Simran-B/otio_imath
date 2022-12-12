@@ -1,0 +1,11 @@
+--- tests/CMakeLists.txt        2022-12-11 20:55:55.820286000 +0000
++++ tests/CMakeLists2.txt       2022-12-11 20:21:42.793912000 +0000
+@@ -21,7 +21,7 @@
+
+     target_link_libraries(${test} opentimelineio)
+     if (NOT "${IMATH_INCLUDES}" STREQUAL "")
+-        target_include_directories(${test} "${IMATH_INCLUDES}")
++        target_include_directories(${test} PRIVATE "${IMATH_INCLUDES}")
+     endif()
+     set_target_properties(${test} PROPERTIES FOLDER tests)
+     add_test(NAME ${test}
